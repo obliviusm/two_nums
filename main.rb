@@ -52,5 +52,23 @@ NUMBERS.radix_sort!
 # p NUMBERS
 test_nums = [231552, 234756, 596873, 648219, 726312, 981237, 988331, 1277361, 1283379]
 test_nums.each do |num|
-  puts "#{num} - #{has_two_nums? num}"
+  t1 = Time.now
+  answer = has_two_nums? num
+  t2 = Time.now
+  time = (t2 - t1) * 1000
+
+  puts "#{num} - #{answer} - #{time.round(2)}ms"
 end
+
+=begin
+results on my PC:
+231552 - true - 4.82ms
+234756 - false - 5.65ms
+596873 - true - 4.67ms
+648219 - true - 5.45ms
+726312 - true - 4.68ms
+981237 - false - 9.88ms
+988331 - true - 4.87ms
+1277361 - false - 9.28ms
+1283379 - false - 9.07ms
+=end
