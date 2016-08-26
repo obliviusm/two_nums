@@ -1,8 +1,9 @@
 require_relative 'merge_sort'
 require_relative 'radix_sort'
+require_relative 'mark_sort'
 
-def has_two_nums? c
-  x = NUMBERS.dup
+def has_two_nums? c, x
+  # x = NUMBERS.dup
   x = x.delete_if {|n| n + x.first > c }
 
   i = 0
@@ -21,20 +22,21 @@ def has_two_nums? c
   false
 end
 
-NUMBERS = []
+numbers = []
 File.open("input.txt", "r") do |f|
   f.each_line do |line|
-    NUMBERS.push line.to_i
+    numbers.push line.to_i
   end
 end
-NUMBERS.radix_sort!
+numbers.radix_sort!
 # NUMBERS = mergesort(NUMBERS)
+# NUMBERS = mark_sort(NUMBERS)
 
 # p NUMBERS
 test_nums = [231552, 234756, 596873, 648219, 726312, 981237, 988331, 1277361, 1283379]
 test_nums.each do |num|
   t1 = Time.now
-  answer = has_two_nums? num
+  answer = has_two_nums? num, numbers.dup
   t2 = Time.now
   time = (t2 - t1) * 1000
 
@@ -63,4 +65,15 @@ merge sort
 988331 - true - 4.73ms
 1277361 - false - 9.03ms
 1283379 - false - 9.14ms
+
+mark sort
+231552 - true - 4.67ms
+234756 - false - 6.18ms
+596873 - true - 5.43ms
+648219 - true - 4.56ms
+726312 - true - 4.66ms
+981237 - false - 9.96ms
+988331 - true - 4.89ms
+1277361 - false - 9.28ms
+1283379 - false - 8.89ms
 =end
